@@ -1,0 +1,47 @@
+{
+  "name": "zoomlaxizhi",
+  "version": "1.0.0",
+  "description": "逐浪羲之 - 新一代中文字体创作者软件！",
+  "main": "dist/main/main/index.js",
+  "author": "Zoomla!CMS 逐浪软件出品",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:main:watch": "tsc -p tsconfig.main.json --watch",
+    "build:legacy": "pyinstaller legacy_font_bridge.spec --noconfirm",
+    "preview": "vite preview",
+    "electron:dev": "concurrently -k \"vite --host 127.0.0.1 --port 5173 --strictPort\" \"npm run build:main:watch\" \"wait-on http://127.0.0.1:5173/src/renderer/index.html dist/main/main/index.js && electron . --dev-server-url=http://127.0.0.1:5173/src/renderer/index.html\"",
+    "electron:build": "npm run build:legacy && npm run build && npm run build:main && electron-builder --config electron-builder.yml && node scripts/copy-eula.js",
+    "electron:build:win": "npm run build:legacy && npm run build && npm run build:main && electron-builder --config electron-builder.yml --win && node scripts/copy-eula.js",
+    "electron:build:mac": "npm run build:legacy && npm run build && npm run build:main && electron-builder --config electron-builder.yml --mac && node scripts/copy-eula.js",
+    "electron:build:linux": "npm run build:legacy && npm run build && npm run build:main && electron-builder --config electron-builder.yml --linux && node scripts/copy-eula.js"
+  },
+  "devDependencies": {
+    "@types/fontkit": "^2.0.9",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/sql.js": "^1.4.11",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.9.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.57",
+    "fontkit": "^2.0.1",
+    "konva": "^9.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-konva": "^18.1.10",
+    "remixicon": "^4.9.1",
+    "sql.js": "^1.10.0",
+    "iconv-lite": "^0.6.3",
+    "zico": "^1.9.1"
+  }
+}

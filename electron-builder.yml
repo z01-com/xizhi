@@ -1,0 +1,33 @@
+appId: com.z01.Xizhi
+productName: 逐浪羲之
+directories:
+  output: dist-electron
+  buildResources: build
+files:
+  - dist/**/*
+  - "!dist/legacy_font_bridge.exe"
+  - "!dist/**/*.tsbuildinfo"
+  - "!dist/**/*.map"
+  - help.md
+  - doc/EULA.txt
+extraResources:
+  - from: dist/legacy_font_bridge.exe
+    to: legacy_font_bridge.exe
+  - from: build/icon.ico
+    to: build/icon.ico
+  - from: doc/EULA.txt
+    to: ../EULA.txt
+mac:
+  target: dmg
+  icon: build/icon.icns
+win:
+  target: nsis
+  icon: build/icon.ico
+linux:
+  target: AppImage
+  icon: build/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
